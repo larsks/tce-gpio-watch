@@ -1,0 +1,12 @@
+#!/bin/sh
+
+: ${DATAFILE:=/mnt/mmcblk0p2/squeezelite.info}
+
+[ -f $DATAFILE ] || exit
+
+. $DATAFILE
+
+curl http://${SERVER_IP}/jsonrpc.js \
+	-d '{"id":1,"method":"slim.request","params":["'"${PLAYER_MAC}"'",["button", "jump_rew"]]}'
+
+

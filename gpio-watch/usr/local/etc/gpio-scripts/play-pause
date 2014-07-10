@@ -1,0 +1,24 @@
+#!/bin/sh
+
+: ${DATAFILE:=/mnt/mmcblk0p2/squeezelite.info}
+
+[ -f $DATAFILE ] || exit
+
+. $DATAFILE
+
+state=$(cat /tmp/player.state 2>/dev/null || echo playing)
+
+case $state in
+	"playing")	cmd="pause"
+			state="paused"
+			;;
+	*)		cmd="play"
+			state="playing"
+			;;
+esac;
+
+curl -i http://${SERVER_IP}/jsonrpc.js -X POST \
+	-d '{"id":1,"method":"slim.request","params":["'"${PLAYER_MAC}"'",["'"$cmd"'"]]}'
+
+echo $state > /tmp/player.state
+

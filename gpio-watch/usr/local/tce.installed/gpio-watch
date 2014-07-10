@@ -1,0 +1,4 @@
+#!/bin/sh
+
+/usr/local/etc/init.d/gpio-watch start
+
