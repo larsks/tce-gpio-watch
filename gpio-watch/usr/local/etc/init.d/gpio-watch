@@ -3,7 +3,7 @@
 case "$1" in
 start)
 echo "Starting gpio-watch"
-start-stop-daemon --start --quiet -b -m -p/var/run/gpio-watch.pid --exec /mnt/mmcblk0p2/tce/gpio-watch -- -s /usr/local/etc/gpio-scripts -e rising 17 21 22
+start-stop-daemon --start --quiet -b -m -p/var/run/gpio-watch.pid --exec /usr/local/bin/gpio-watch -- -s /usr/local/etc/gpio-scripts -e switch 17 21 22
 ;;
 stop)
 echo "Stopping gpio-watch"
